@@ -27,7 +27,7 @@ const DonarList = () => {
   const LoadBlockchaindata=async()=>{
     const web3=window.web3;
   const accounts=await web3.eth.getAccounts();
-  console.log(accounts);
+  //console.log(accounts);
 
     const networkId = await web3.eth.net.getId();
     const networkData=Campaignabi.networks[networkId];
@@ -35,7 +35,7 @@ const DonarList = () => {
     if(networkData){
       const campaign=new web3.eth.Contract(Campaignabi.abi,networkData.address);
       const donorcount=await campaign.methods.donatorsCount().call();
-      console.log(donorcount)
+     // console.log(donorcount)
       let i=0;
       while (i<donorcount) {
        const request1=await campaign.methods.donators(i).call();

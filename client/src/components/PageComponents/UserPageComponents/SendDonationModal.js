@@ -1,4 +1,7 @@
 import { useRef } from 'react';
+import Campaignabi from '../contracts/Campaign.json'
+import Web3 from "web3";
+
 
 // Assets
 import { ImCancelCircle } from 'react-icons/im';
@@ -9,8 +12,25 @@ const SendDonationModal = ({ closeModal }) => {
   const emailInputRef = useRef(null);
   const amountInputRef = useRef(null);
 
-  const formSubmitHandler = event => {
+  const formSubmitHandler = async(event) => {
     event.preventDefault();
+
+
+    const web3=window.web3;
+  const accounts=await web3.eth.getAccounts();
+  const networkId = await web3.eth.net.getId();
+  const networkData=Campaignabi.networks[networkId];
+  if(networkData){
+    const campaign=new web3.eth.Contract(Campaignabi.abi,networkData.address);
+   //console.log(lotteryamount.current.value) 
+    const players=await campaign.methods.contribute(nameInputRef.current.value).send({
+from:accounts[0],
+value:web3.utils.toWei(amountInputRef.current.value,'ether')
+    });
+   
+  }
+  else
+  window.alert('the start contract is not deployed current network')
 
     // do something
 
@@ -70,7 +90,7 @@ const SendDonationModal = ({ closeModal }) => {
                 </label>
                 <input
                   ref={amountInputRef}
-                  type='text'
+                  type='number'
                   className='w-full px-4 py-4 text-lg border-2 rounded-lg outline-none border-accentOrange bg-backgroundSecondary'
                 />
               </div>

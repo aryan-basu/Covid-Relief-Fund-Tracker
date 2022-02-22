@@ -1,4 +1,9 @@
+import { Link } from 'react-router-dom';
+import { useUserAuth } from '../../context/userAuthContext';
+
 const Navbar = () => {
+  const { loginUser, user, logoutUser } = useUserAuth();
+
   return (
     <div className='flex items-center self-center justify-between w-full px-8 py-2 mt-4 mb-16 border-2 border-accentOrange rounded-xl bg-backgroundSecondary'>
       {/* Logo */}
@@ -8,17 +13,26 @@ const Navbar = () => {
 
       {/* Links */}
       <div className='flex'>
-        <div className='mr-8 font-semibold text-white transition-all cursor-pointer active:scale-95'>
-          Home
-        </div>
-        <div className='font-semibold text-white transition-all cursor-pointer active:scale-95 '>
-          Info
-        </div>
+        <Link to='/'>
+          <div className='mr-8 font-semibold text-white transition-all cursor-pointer active:scale-95'>
+            Home
+          </div>
+        </Link>
+
+        <Link to='/about'>
+          <div className='font-semibold text-white transition-all cursor-pointer active:scale-95 '>
+            About
+          </div>
+        </Link>
       </div>
 
       {/* Login/Signup Button */}
-      <button className='flex items-center justify-center px-5 py-2 font-semibold text-white transition-all rounded-lg active:scale-95 bg-accentPurple'>
-        Login
+      <button
+        onClick={() => {
+          user ? logoutUser() : loginUser();
+        }}
+        className='flex items-center justify-center px-5 py-2 font-semibold text-white transition-all rounded-lg active:scale-95 bg-accentPurple'>
+        {user ? 'Logout' : 'Login'}
       </button>
     </div>
   );
