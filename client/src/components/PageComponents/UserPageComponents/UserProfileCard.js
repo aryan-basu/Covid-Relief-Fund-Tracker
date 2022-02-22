@@ -56,31 +56,8 @@ const [profileaddress,setprofileaddress]=useState(null);
     }
     
     
-    const DONOR_DATA = [
-      {
-        id: String(Math.random()),
-        name: 'Aryan Basu',
-        donation_amount: 3.2,
-        profile_pic: '',
-      },
-      {
-        id: String(Math.random()),
-        name: 'Shivam Gupta',
-        donation_amount: 1.2,
-        profile_pic: '',
-      },
-      {
-        id: String(Math.random()),
-        name: 'Ravish Goyal',
-        donation_amount: 1.7,
-        profile_pic: '',
-      },
-    ];
+    
   
-    //! /////////////////////////////////////////////////////////
-    //* /////////////////////////////////////////////////////////
-  
-   // console.log(DONOR_DATA);
   
     useEffect(() => {
      
