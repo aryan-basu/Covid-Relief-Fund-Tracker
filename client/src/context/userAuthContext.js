@@ -12,7 +12,7 @@ export function UserAuthContextProvider({ children }) {
       userName: 'John Halo',
       email: 'john117@gmail.com',
       // Set true for admin, set false for user
-      isAdmin: true,
+      isAdmin: false,
     });
   };
 
