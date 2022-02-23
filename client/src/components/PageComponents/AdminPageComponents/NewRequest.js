@@ -1,16 +1,18 @@
 import { useRef } from 'react';
+import Campaignabi from '../contracts/Campaign.json'
 
 // Assets
 import { ImCancelCircle } from 'react-icons/im';
 import DonationImg from './../../../assets/Donation.svg';
 
 const NewRequest = ({ closeModal }) => {
+
   const nameInputRef = useRef(null);
   const descriptionInputRef = useRef(null);
   const amountInputRef = useRef(null);
   const addressInputRef = useRef(null);
 
-  const formSubmitHandler = event => {
+  const formSubmitHandler = async(event) => {
     event.preventDefault();
     const [name, requested_amount, description, address] = [
       nameInputRef.current.value,
@@ -19,17 +21,29 @@ const NewRequest = ({ closeModal }) => {
       addressInputRef.current.value,
     ];
 
-    // do server codde here
+    
+    const web3=window.web3;
+  const accounts=await web3.eth.getAccounts();
+  const networkId = await web3.eth.net.getId();
+  const networkData=Campaignabi.networks[networkId];
+  if(networkData){
+    const campaign=new web3.eth.Contract(Campaignabi.abi,networkData.address);
+   //console.log(lotteryamount.current.value) 
+   const players=await campaign.methods.createRequest(descriptionInputRef.current.value,amountInputRef.current.value,addressInputRef.current.value).send({
+    from:accounts[0],
+        });
 
-    console.log(name, requested_amount, description, address);
-
-    // clearing input fields
+        
+   
+  }
+  else
+  window.alert('the start contract is not deployed current network')
     nameInputRef.current.value = '';
     descriptionInputRef.current.value = '';
     amountInputRef.current.value = '';
     addressInputRef.current.value = '';
   };
-
+  
   return (
     <div className='absolute top-0 bottom-0 left-0 right-0 z-10 flex backdrop-blur-lg'>
       <div className='relative flex items-center justify-center w-full h-full'>
@@ -56,7 +70,7 @@ const NewRequest = ({ closeModal }) => {
                 <label
                   htmlFor='name'
                   className='absolute top-0 px-4 text-lg font-semibold border-2 rounded-lg border-accentPurple bg-backgroundPrimary left-10'>
-                  Name
+                  Title
                 </label>
                 <input
                   ref={nameInputRef}

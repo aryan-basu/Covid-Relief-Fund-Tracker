@@ -4,53 +4,12 @@ import Campaignabi from '../contracts/Campaign.json'
 import Web3 from "web3";
 import React,{useEffect,useState} from 'react';
 
-/*const DUMMY_REQUEST_DATA = [
-  {
-    address: 'aweiwiebii33i32bbveiobiwnbioni3i233ibg3bi',
-    request_amount: 2.3,
-    description: 'lorem ipsum lorem ipsum lorem ipsum',
-    is_approved: false,
-    current_approval_count: 1,
-    total_approval_count: 3,
-  },
-  {
-    address: 'eknrnrkbneroibn98987834oernbionrbionrbion',
-    request_amount: 1.3,
-    description: 'rent a car',
-    is_approved: false,
-    current_approval_count: 1,
-    total_approval_count: 2,
-  },
-  {
-    address: 'uuiornberiobniernboi0979878789erobinobnini',
-    request_amount: 8,
-    description: 'buy a bulb',
-    is_approved: false,
-    current_approval_count: 0,
-    total_approval_count: 2,
-  },
-  {
-    address: 'pkppoouguyvbi644681688168ubibuibuib16816181',
-    request_amount: 2.3,
-    description: 'apple mango orange teal leo',
-    is_approved: false,
-    current_approval_count: 0,
-    total_approval_count: 1,
-  },
-  {
-    address: 'qqconeincione1897897312jnbninvirnoi20993989029',
-    request_amount: 27,
-    description: 'jimmy john alder james teal aries',
-    is_approved: false,
-    current_approval_count: 2,
-    total_approval_count: 4,
-  },
-];  */
 
 const ViewDonationRequests = ({closeModal}) => {
   
   const requestArray=[];
   const [finalarray,setfinalarray]=useState([])
+  const [totalcount,settotalcount]=useState(0);
   const loadWeb3=async () =>{
     if(window.ethereum){
       window.web3=new Web3(window.ethereum);
@@ -87,7 +46,8 @@ const ViewDonationRequests = ({closeModal}) => {
               }
             
               setfinalarray(requestArray);
-    
+              const totalcontributorcount= await camapign.methods.approversCount().call();
+             settotalcount(totalcontributorcount);
  
       }
       else
@@ -151,7 +111,7 @@ const ViewDonationRequests = ({closeModal}) => {
                     {/* amount */}
                     <div className='relative flex items-center justify-between w-full px-6 py-2 mt-6 border-2 rounded-lg shadow-lg border-accentOrange bg-backgroundSecondary'>
                       <span className='text-lg'>
-                        {item.request_amount} Eth.
+                        {item.amaount} Eth.
                       </span>
                       <span className='absolute top-[-15px] left-15 text-md bg-backgroundPrimary px-4 rounded-md border-[1px] border-accentPurple'>
                         Amount
@@ -160,8 +120,8 @@ const ViewDonationRequests = ({closeModal}) => {
                     {/* Approvals */}
                     <div className='relative flex items-center justify-between w-full px-6 py-2 mt-6 border-2 rounded-lg shadow-lg border-accentOrange bg-backgroundSecondary'>
                       <span className='text-lg'>
-                        {item.total_approval_count} /
-                        {item.current_approval_count}
+                        {item.ApprovalCount} /
+                        {totalcount}
                       </span>
                       <span className='absolute top-[-15px] left-15 text-md bg-backgroundPrimary px-4 rounded-md border-[1px] border-accentPurple'>
                         Approval Count

@@ -1,10 +1,76 @@
 // Assets
 import { ImCancelCircle } from 'react-icons/im';
 
+
+
+import Campaignabi from '../contracts/Campaign.json'
+import Web3 from "web3";
+import React,{useEffect,useState} from 'react';
+
+
+  
+ 
+
 const ViewDonationRequests = ({ closeModal, donationData }) => {
+
+
+  const [totalcount,settotalcount]=useState(0);
+
+
+  const requestArray=[];
+  const [finalarray,setfinalarray]=useState([])
+  const loadWeb3=async () =>{
+    if(window.ethereum){
+      window.web3=new Web3(window.ethereum);
+      await window.ethereum.enable();
+  
+    }else if(window.web3){
+      window.web3=new Web3(window.web3.currentProvider);
+    }
+    else{
+      window.alert(
+  "Non-Ethereum browser detected You  should consider trying Metamask!"
+      );
+    }
+  };
+  const LoadBlockchaindata=async()=>{
+    const web3=window.web3;
+  //const accounts=await web3.eth.getAccounts();
+ 
+    const networkId = await web3.eth.net.getId();
+    const networkData=Campaignabi.networks[networkId];
+  
+      if(networkData){
+        const camapign=new web3.eth.Contract(Campaignabi.abi,networkData.address);
+       
+         
+        const requestcount=await camapign.methods.getRequestsCount().call();
+  
+              let i=0;
+              while (i<requestcount) {
+               const request1=await camapign.methods.requests(i).call();
+             
+               i++;
+               requestArray.push({"description":request1.description,"amaount":request1.value,"address":request1.recipient,"Completed":request1.complete,"ApprovalCount":request1.approvalCount});
+              }
+            
+              setfinalarray(requestArray);
+    
+              const totalcontributorcount= await camapign.methods.approversCount().call();
+              settotalcount(totalcontributorcount);
+      }
+      else
+      window.alert('the start contract is not deployed current network')
+    }
   const approveDonationHandler = address => {
     console.log(`Donation Approved for ${address}`);
   };
+  useEffect(() => {
+    loadWeb3();
+    LoadBlockchaindata();
+  //  console.log(requestArray[0])
+  })
+
 
   return (
     <div className='absolute top-0 bottom-0 left-0 right-0 z-10 flex backdrop-blur-lg'>
@@ -24,7 +90,7 @@ const ViewDonationRequests = ({ closeModal, donationData }) => {
 
           {/* requested donations list */}
 
-          {donationData.map(item => {
+          {finalarray.map(item => {
             return (
               // list item
               <div className='flex flex-col w-full p-4 px-6 mt-4 mb-4 rounded-lg bg-backgroundSecondary'>
@@ -51,7 +117,7 @@ const ViewDonationRequests = ({ closeModal, donationData }) => {
                     {/* amount */}
                     <div className='relative flex items-center justify-between w-full px-6 py-2 mt-6 border-2 rounded-lg shadow-lg border-accentOrange bg-backgroundSecondary'>
                       <span className='text-lg'>
-                        {item.request_amount} Eth.
+                        {item.amaount} Eth.
                       </span>
                       <span className='absolute top-[-15px] left-15 text-md bg-backgroundPrimary px-4 rounded-md border-[1px] border-accentPurple'>
                         Amount
@@ -60,8 +126,8 @@ const ViewDonationRequests = ({ closeModal, donationData }) => {
                     {/* Approvals */}
                     <div className='relative flex items-center justify-between w-full px-6 py-2 mt-6 border-2 rounded-lg shadow-lg border-accentOrange bg-backgroundSecondary'>
                       <span className='text-lg'>
-                        {item.total_approval_count} /
-                        {item.current_approval_count}
+                        {item.ApprovalCount} /
+                        {totalcount}
                       </span>
                       <span className='absolute top-[-15px] left-15 text-md bg-backgroundPrimary px-4 rounded-md border-[1px] border-accentPurple'>
                         Approval Count
