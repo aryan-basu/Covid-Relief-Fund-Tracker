@@ -40,7 +40,7 @@ function contribute(string memory name) public payable {
  
     require (msg.value>minimumContribution);
     approvers[msg.sender]=true;
-    approversCount++;
+   
     if(donoramount[msg.sender]==0){
        Donators memory newdonor=Donators({
         name:name,
@@ -48,6 +48,7 @@ function contribute(string memory name) public payable {
     });
     donators.push(newdonor);
    donorname[msg.sender]=name;
+    approversCount++;
     donoramount[msg.sender]=donoramount[msg.sender]+msg.value;
     }
     else
