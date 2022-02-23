@@ -51,6 +51,7 @@ const ViewDonationRequests = ({ closeModal, donationData }) => {
                const request1=await camapign.methods.requests(i).call();
              
                i++;
+               console.log(request1.complete)
                requestArray.push({"description":request1.description,"amaount":request1.value,"address":request1.recipient,"Completed":request1.complete,"ApprovalCount":request1.approvalCount});
               }
             
@@ -157,7 +158,7 @@ const ViewDonationRequests = ({ closeModal, donationData }) => {
                 <button
                   onClick={() => approveDonationHandler(key)}
                   className='flex items-center px-5 py-2 mt-4 mb-2 ml-4 text-xl font-semibold transition-all border-2 rounded-lg w-fit border-accentPurple hover:bg-accentPurple bg-backgroundPrimary active:scale-95'>
-                  Approve
+                  {item.Completed? 'Approved':'Approve'}
                 </button>
               </div>
             );

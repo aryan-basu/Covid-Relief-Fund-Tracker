@@ -53,8 +53,27 @@ const ViewDonationRequests = ({closeModal}) => {
       else
       window.alert('the start contract is not deployed current network')
     }
-  const approveDonationHandler = address => {
-    console.log(`Donation Approved for ${address}`);
+  const approveDonationHandler =async(index) => {
+    const web3=window.web3;
+    const accounts=await web3.eth.getAccounts();
+    const networkId = await web3.eth.net.getId();
+    const networkData=Campaignabi.networks[networkId];
+    if(networkData){
+      const campaign=new web3.eth.Contract(Campaignabi.abi,networkData.address);
+
+     const players=await campaign.methods.finalizeRequest(index).send({
+       from:accounts[0]
+     });
+     //console.log(lotteryamount.current.value) 
+    //  const players=await campaign.methods.contribute(nameInputRef.current.value).send({
+ // from:accounts[0],
+ // value:web3.utils.toWei(amountInputRef.current.value,'ether')
+   //   });
+     
+    }
+    else
+    window.alert('the start contract is not deployed current network')
+
   };
   useEffect(() => {
     loadWeb3();
@@ -84,10 +103,10 @@ const ViewDonationRequests = ({closeModal}) => {
 
           {/* requested donations list */}
 
-          {finalarray.map(item => {
+          {finalarray.map((item,key) => {
             return (
               // list item
-              <div className='flex flex-col w-full p-4 px-6 mt-4 mb-4 rounded-lg bg-backgroundSecondary'>
+              <div key={key} className='flex flex-col w-full p-4 px-6 mt-4 mb-4 rounded-lg bg-backgroundSecondary'>
                 <div className='flex w-full'>
                   {/* col 1 */}
                   <div className='flex w-[60%] flex-col  px-4 items-center justify-center'>
@@ -130,9 +149,9 @@ const ViewDonationRequests = ({closeModal}) => {
                   </div>
                 </div>
                 <button
-                  onClick={() => approveDonationHandler(item.address)}
+                  onClick={() => approveDonationHandler(key)}
                   className='flex items-center px-5 py-2 mt-4 mb-2 ml-4 text-xl font-semibold transition-all border-2 rounded-lg w-fit border-accentPurple hover:bg-accentPurple bg-backgroundPrimary active:scale-95'>
-                  Approve
+                  {item.Completed? 'Approved':'Yet to Approve'}
                 </button>
               </div>
             );
