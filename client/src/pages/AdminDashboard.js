@@ -13,7 +13,7 @@ import NewRequest from '../components/PageComponents/AdminPageComponents/NewRequ
 import ViewDonationRequests from '../components/PageComponents/AdminPageComponents/ViewDonationRequests';
 
 const AdminDashboard = () => {
-  const navigate = useNavigate('');
+  const navigate = useNavigate();
 
   //! ********************************************************************************
   const DUMMY_REQUEST_DATA = [

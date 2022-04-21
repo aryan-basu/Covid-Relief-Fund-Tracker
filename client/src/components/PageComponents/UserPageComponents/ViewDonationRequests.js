@@ -105,8 +105,8 @@ const ViewDonationRequests = ({ closeModal, donationData }) => {
         </button>
 
         {/* modal content *******************************************/}
-        <div className='flex flex-col items-center h-[80%] w-3/4 px-12 py-8 overflow-y-scroll text-white border-2 rounded-lg bg-backgroundPrimary border-accentOrange'>
-          <span className='mb-12 text-5xl font-bold'>Requested Donations</span>
+        <div className='flex flex-col items-center h-[80%] w-[95%] md:w-3/4 px-2 md:px-12 py-8 overflow-y-scroll text-white border-2 rounded-lg bg-backgroundPrimary border-accentOrange'>
+          <span className='mb-12 text-3xl md:text-5xl font-bold'>Requested Donations</span>
 
           {/* requested donations list */}
 

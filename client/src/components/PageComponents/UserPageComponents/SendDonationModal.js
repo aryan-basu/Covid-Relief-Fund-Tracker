@@ -47,8 +47,8 @@ value:web3.utils.toWei(amountInputRef.current.value,'ether')
   };
 
   return (
-    <div className='absolute top-0 bottom-0 left-0 right-0 z-10 flex backdrop-blur-lg'>
-      <div className='relative flex items-center justify-center w-full h-full'>
+    <div className='absolute top-0 overflow-none bottom-0 left-0 right-0 z-10 flex backdrop-blur-lg'>
+      <div className='relative flex overflow-hidden items-center justify-center w-full h-full'>
         {/* close modal button */}
         <button
           onClick={() => {
@@ -59,8 +59,8 @@ value:web3.utils.toWei(amountInputRef.current.value,'ether')
         </button>
 
         {/* modal content *******************************************/}
-        <div className='flex w-3/4 px-12 py-6 text-white border-2 rounded-lg bg-backgroundPrimary border-accentOrange'>
-          <div className='flex flex-col w-1/2 h-full'>
+        <div className='flex md:flex-row flex-col w-[98%]  md:w-3/4 px-12 py-6 text-white border-2 rounded-lg bg-backgroundPrimary border-accentOrange'>
+          <div className='flex flex-col w-full md:w-1/2 h-full'>
             {/* headings */}
             <span className='mt-8 mb-2 text-5xl font-bold'> Red Cross</span>
             <span className='mb-8 text-3xl '>Covid Relief</span>
