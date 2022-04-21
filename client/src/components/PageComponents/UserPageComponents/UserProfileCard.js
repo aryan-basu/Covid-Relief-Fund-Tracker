@@ -66,9 +66,9 @@ const [profileaddress,setprofileaddress]=useState(null);
     //  console.log(requestArray[0])
     })
     return (
-      <div className='flex flex-col  w-[50%] px-8 py-12 border-2 shadow-lg bg-backgroundSecondary border-accentOrange rounded-xl'>
+      <div className='flex flex-col w-full md:w-[50%] px-8 py-12 border-2 shadow-lg bg-backgroundSecondary border-accentOrange rounded-xl'>
         {/* profile img */}
-        <div className='flex self-center w-64 p-8 mb-8 border-2 rounded-full aspect-square border-accentPurple'>
+        <div className='flex self-center w-[50%] md:w-64 p-8 mb-8 border-2 rounded-full aspect-square border-accentPurple'>
           <img
             src={`https://avatars.dicebear.com/api/bottts/${profileaddress}.svg`}
             alt='profile-img'
@@ -76,19 +76,18 @@ const [profileaddress,setprofileaddress]=useState(null);
         </div>
         {/* title */}
         <div className='flex flex-col align-center '>
-          <div className='flex mb-2'>
-            <span className='mr-6 text-4xl font-bold'>Hello👋, </span>
-            <span className='flex px-4 py-2 text-xl text-white align-center'>
+          <div className='flex flex-col md:flex-row mb-2'>
+            <span className='mr-6 text-2xl  md:text-4xl   font-semibold md:font-bold'>Hello👋, </span>
+            <div className='flex p-4 mt-4 bg-accentOrange break-all border-2 rounded-lg flex-wrap px-2 md:px-4 py-2 text-lg md:text-xl text-white md:align-center'>
               {profileaddress}
-            </span>
+            </div>
           </div>
-          <span className='mt-6 text-xl '>
+          <span className='mt-6 text-lg md:text-xl '>
             Thank You for donating to Covid Relief Fund,
             <br /> You can donate more Ether using <strong>Donate</strong> button,
             <br /> and view all the voting requests in <strong>
               Requests
-            </strong>{' '}
-            menu
+            </strong>
           </span>
         </div>
   
