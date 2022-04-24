@@ -5,7 +5,7 @@ const Navbar = () => {
   const { loginUser, user, logoutUser } = useUserAuth();
 
   return (
-    <div className='flex items-center self-center justify-between w-full px-2 md:px-8 py-2 mt-4 mb-16 border-2 border-accentOrange rounded-xl bg-backgroundSecondary'>
+    <div className='flex items-center self-center justify-between w-[96%] px-2 md:px-8 py-2 mt-4 mb-32 border-2 border-accentOrange rounded-xl bg-backgroundSecondary'>
       {/* Logo */}
       <div className='my-2 text-lg md:text-2xl font-bold transition-all border-b-2 cursor-pointer border-b-backgroundSecondary hover:border-b-accentOrange text-accentOrange'>
         ETHER
