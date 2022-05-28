@@ -1,6 +1,7 @@
 import { isVisible } from '@testing-library/user-event/dist/utils';
 import Campaignabi from '../contracts/Campaign.json'
 import Web3 from "web3";
+import firebase from '../firebase/firebaseutils';
 import React,{useEffect,useState} from 'react';
 
 const DonarList = () => {
@@ -38,14 +39,15 @@ const DonarList = () => {
      // console.log(donorcount)
       let i=0;
       while (i<donorcount) {
-       const request1=await campaign.methods.donators(i).call();
-    
-      const amount1=await campaign.methods.donoramount(request1.donoraddress).call();
-      const name=await campaign.methods.donorname(request1.donoraddress).call();
-      const amount2=web3.utils.fromWei(amount1, 'ether')
-       i++;
-       donatorArray.push({"name":name,"amount":amount2,"address":request1.donoraddress});
-      }
+        const request1=await campaign.methods.donators(i).call();
+     
+       const amount1=await campaign.methods.donoramount(request1.donoraddress).call();
+       const name=await campaign.methods.donorname(request1.donoraddress).call();
+       const amount2=web3.utils.fromWei(amount1, 'ether')
+        i++;
+        donatorArray.push({"name":name,"amount":amount2,"address":request1.donoraddress});
+       }
+       
       
     
       setfinaldonatorarray(donatorArray);

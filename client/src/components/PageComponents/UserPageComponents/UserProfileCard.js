@@ -1,5 +1,6 @@
 import Campaignabi from '../contracts/Campaign.json'
 import Web3 from "web3";
+import firebase from '../firebase/firebaseutils';
 import React,{useEffect,useState} from 'react';
 
 const UserProfileCard = ({
@@ -9,6 +10,7 @@ const UserProfileCard = ({
   }) => {
 
 const [profileaddress,setprofileaddress]=useState(null);
+const[username,setusername]=useState("");
     const loadWeb3=async () =>{
       if(window.ethereum){
         window.web3=new Web3(window.ethereum);
@@ -27,7 +29,13 @@ const [profileaddress,setprofileaddress]=useState(null);
       const web3=window.web3;
     const accounts=await web3.eth.getAccounts();
     setprofileaddress(accounts);
-   //console.log(accounts);
+    firebase.firestore().collection('donor-data').doc(`${profileaddress}`).get().then((doc) => {
+  
+  
+      setusername(doc.data().Name);
+    
+});
+   
   
       const networkId = await web3.eth.net.getId();
       const networkData=Campaignabi.networks[networkId];
@@ -79,7 +87,7 @@ const [profileaddress,setprofileaddress]=useState(null);
           <div className='flex flex-col md:flex-row mb-2'>
             <span className='mr-6 text-2xl  md:text-4xl   font-semibold md:font-bold'>Hello👋, </span>
             <div className='flex p-4 mt-4 bg-accentOrange break-all border-2 rounded-lg flex-wrap px-2 md:px-4 py-2 text-lg md:text-xl text-white md:align-center'>
-              {profileaddress}
+              {username} -- {profileaddress}
             </div>
           </div>
           <span className='mt-6 text-lg md:text-xl '>
