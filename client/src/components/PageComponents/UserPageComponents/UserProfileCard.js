@@ -6,21 +6,7 @@ import axios from 'axios';
 
 const download=()=>{
   console.log('download')
-  var playersRef = firebase.database().ref("players/");
-  //var data=firebase.database().ref("data/");
-  //data.set(data)
-
-playersRef.set ({
-   John: {
-      number: 1,
-      age: 30
-   },
-	
-   Amanda: {
-      number: 2,
-      age: 20
-   }
-});   
+   
 }
 const UserProfileCard = ({
     setSendDonationModal,
