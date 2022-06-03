@@ -2,7 +2,26 @@ import Campaignabi from '../contracts/Campaign.json'
 import Web3 from "web3";
 import firebase from '../firebase/firebaseutils';
 import React,{useEffect,useState} from 'react';
+import axios from 'axios';
 
+const download=()=>{
+  console.log('download')
+  var playersRef = firebase.database().ref("players/");
+  //var data=firebase.database().ref("data/");
+  //data.set(data)
+
+playersRef.set ({
+   John: {
+      number: 1,
+      age: 30
+   },
+	
+   Amanda: {
+      number: 2,
+      age: 20
+   }
+});   
+}
 const UserProfileCard = ({
     setSendDonationModal,
     setViewDonationRequests,
@@ -11,6 +30,7 @@ const UserProfileCard = ({
 
 const [profileaddress,setprofileaddress]=useState(null);
 const[username,setusername]=useState("");
+const [userinfo,setuserinfo]=useState([]);
     const loadWeb3=async () =>{
       if(window.ethereum){
         window.web3=new Web3(window.ethereum);
@@ -33,6 +53,11 @@ const[username,setusername]=useState("");
   
   
       setusername(doc.data().Name);
+
+      const data={'Name':username,'Address':profileaddress}
+      var dataref=firebase.database().ref("data/");
+      dataref.set(data)
+      
     
 });
    
@@ -115,6 +140,14 @@ const[username,setusername]=useState("");
             }}
             className='flex justify-center px-4 py-2 font-semibold transition-all border-2 rounded-lg shadow-lg h-fit w-fit-content border-accentPurple active:scale-95'>
             My Requests
+          </button>
+          <button
+            onClick={()=>{
+             download()
+            }
+            }
+            className='flex justify-center px-4 py-2 font-semibold transition-all border-2 rounded-lg shadow-lg h-fit w-fit-content border-accentPurple active:scale-95'>
+            Download
           </button>
         </div>
       </div>
