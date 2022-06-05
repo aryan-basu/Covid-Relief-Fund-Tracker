@@ -18,7 +18,7 @@ const AboutPage = () => {
           <h1 className='text-4xl md:text-2xl mt-6 font-bold' >Aryan Sharma</h1>
           <h2 className='text-2xl font-semibold text-accentOrange mt-2' > UE195035</h2>
 
-          <h3 className='text-2xl mt-4   md:text-xl '>Lorem ipsum donor imet aoigw wogihwieg awoei of hweg wegow wagoweg weg0weg</h3>
+          <h3 className='text-2xl mt-4   md:text-xl '>A third year undergrad pursuing bachelor's of engineering in electronics and communication engineering interested in web/android and UI design</h3>
         </div>
       </div>
 
@@ -32,7 +32,7 @@ const AboutPage = () => {
         <div className="flex flex-col px-6 w-2/3 ">
           <h1 className='text-4xl md:text-2xl mt-6 font-bold' >Aryan Basu</h1>
           <h2 className='text-2xl font-semibold text-accentOrange mt-2' > UE195034</h2>
-          <h3 className='text-2xl mt-4  md:text-xl '>Lorem ipsum donor imet aoigw wogihwieg awoei of hweg wegow wagoweg weg0weg</h3>
+          <h3 className='text-2xl mt-4  md:text-xl '>A third year undergrad pursuing bachelor's of engineering in electronics and communication engineering interested in web/android and blockchain technology </h3>
         </div>
         </div>
         
