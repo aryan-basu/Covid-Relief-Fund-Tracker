@@ -91,14 +91,14 @@ const AdminDashboard = () => {
       {/* ****************************************************** */}
       {/* HomePage */}
       {/** 1st column,  user/admin profile card */}
-      <div className='flex flex-1 mt-16 text-white '>
-        <ProfileCard
+      <div className='flex justify-between items-center my-16 self-center w-[96%] text-white '>
+         <ProfileCard
           setIsNewRequestModalOpen={setIsNewRequestModalOpen}
           // prettier-ignore
           setIsViewPreviousRequestsModalOpen={setIsViewPreviousRequestsModalOpen}
         />
         {/*2nd column, address, total donation and donor list  */}
-        <div className='flex flex-col items-center w-3/4 px-12 '>
+        <div className='flex flex-col ml-6 items-flex-end w-3/4  '>
           {/* wallet address bar */}
           <AddressBar />
           {/* stats */}

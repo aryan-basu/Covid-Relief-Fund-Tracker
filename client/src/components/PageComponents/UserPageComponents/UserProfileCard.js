@@ -94,14 +94,14 @@ const [userinfo,setuserinfo]=useState([]);
           />
         </div>
         {/* title */}
-        <div className='flex flex-col align-center '>
-          <div className='flex flex-col md:flex-row mb-2'>
-            <span className='mr-6 text-2xl  md:text-4xl   font-semibold md:font-bold'>Hello👋, </span>
-            <div className='flex p-4 mt-4 bg-accentOrange break-all border-2 rounded-lg flex-wrap px-2 md:px-4 py-2 text-lg md:text-xl text-white md:align-center'>
-              {username} -- {profileaddress}
+        <div className='flex flex-col  '>
+          <div className='flex flex-col  mb-2'>
+            <span className='mr-6 text-xl  md:text-4xl   font-semibold md:font-bold'>Hello👋,{username} </span>
+            <div className='flex p-4 mt-4  break-all border-2 border-accentOrange rounded-lg flex-wrap px-2 md:px-4 py-1 text-sm md:text-md text-white md:align-center'>
+              {profileaddress}
             </div>
           </div>
-          <span className='mt-6 text-lg md:text-xl '>
+          <span className='mt-6 text-md md:text-lg '>
             Thank You for donating to Covid Relief Fund,
             <br /> You can donate more Ether using <strong>Donate</strong> button,
             <br /> and view all the voting requests in <strong>
@@ -112,29 +112,28 @@ const [userinfo,setuserinfo]=useState([]);
   
         {/* donation Buttons */}
   
-        <div className='flex flex-row justify-between mt-16 mb-12 '>
+        <div className='flex flex-col md:flex-row  justify-between mt-16 mb-12 '>
           <button
             onClick={() => {
               setSendDonationModal(true);
             }}
-            className='flex justify-center px-4 py-2 mr-8 font-semibold transition-all rounded-lg shadow-lg h-fit w-fit-content bg-accentPurple active:scale-95'>
+            className='flex justify-center px-4 py-2 mb-4 font-semibold transition-all rounded-lg hover:scale-1.05 shadow-lg h-fit w-fit-content bg-accentPurple  active:scale-95'>
             Donate
           </button>
           <button
             onClick={() => {
               setViewDonationRequests(true);
             }}
-            className='flex justify-center px-4 py-2 font-semibold transition-all border-2 rounded-lg shadow-lg h-fit w-fit-content border-accentPurple active:scale-95'>
+            className='flex justify-center px-4 py-2 mb-4 font-semibold transition-all border-2 rounded-lg hover:scale-1.05 shadow-lg h-fit w-fit-content border-accentPurple active:scale-95'>
             My Requests
           </button>
-          <button
-            onClick={()=>{
-             download()
-            }
-            }
-            className='flex justify-center px-4 py-2 font-semibold transition-all border-2 rounded-lg shadow-lg h-fit w-fit-content border-accentPurple active:scale-95'>
+          <a
+          href={"https://covid-relief-fund-backend.herokuapp.com/download"}
+           
+            
+            className='flex justify-center px-4 py-2 mb-4 font-semibold transition-all bg-accentOrange hover:scale-1.05  rounded-lg shadow-lg h-fit w-fit-content active:scale-95'>
             Download
-          </button>
+          </a>
         </div>
       </div>
     );

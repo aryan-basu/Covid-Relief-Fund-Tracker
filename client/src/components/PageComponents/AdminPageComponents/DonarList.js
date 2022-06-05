@@ -92,18 +92,21 @@ const DonarList = () => {
   })
 
   return (
-    <div className='flex flex-col items-center  w-[48%] px-6 py-6 text-white border-accentOrange border-2 rounded-lg shadow-lg bg-backgroundSecondary'>
+    <div className='flex flex-col overflow-y-scroll  overflow-x-hidden items-center  w-[48%] px-6 py-6 text-white border-accentOrange border-2 rounded-lg shadow-lg bg-backgroundSecondary'>
       {/* header */}
       <span className='self-start mb-4 text-3xl font-bold'>Our Donors</span>
       {/* list items */}
       {finaldonatorarray.map((item, key) => {
+        if(!item.name) return;
         return (
           <div
             key={key}
             className='flex items-center justify-between w-full px-2 py-2 mx-6 mt-2 rounded-lg bg-backgroundSecondary'>
             <div className='flex items-center'>
               {/* profile_img */}
-              <div className='flex w-10 mx-2 rounded-full aspect-square bg-backgroundPrimary '></div>
+              <div className='flex w-10 mx-2 rounded-full aspect-square bg-backgroundPrimary '>
+                <img className='rounded-full' src={`https://avatars.dicebear.com/api/initials/${(item.name)}.svg`} alt="" />
+              </div>
               {/* name */}
               <span className='mx-2 text-xl'>{item.name}</span>
             </div>
@@ -117,9 +120,7 @@ const DonarList = () => {
       })}
 
       {/* view all donations button */}
-      <button className='self-start px-8 py-3 mt-6 font-semibold transition-all rounded-lg bg-accentPurple active:scale-95'>
-        View All
-      </button>
+ 
     </div>
   );
 };

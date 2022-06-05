@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import UserDashboard from './pages/UserDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import AboutPage from './pages/AboutPage';
+import PageNotFound from './pages/PageNotFound';
 
 import ProtectedRoute from './components/Utils/ProtectedRoute';
 import UnprotectedRoute from './components/Utils/UnprotectedRoute';
@@ -36,6 +37,8 @@ function App() {
             element={
               <UnprotectedRoute UnprotectedComponent={<AboutPage />} />
             }></Route>
+            {/* 404 Page Not FOund */}
+            <Route path='*' element={<PageNotFound />} ></Route>
         </Routes>
       </Router>
     </>
